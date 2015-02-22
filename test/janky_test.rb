@@ -162,11 +162,11 @@ class JankyTest < Test::Unit::TestCase
   test "hubot setup" do
     Janky::GitHub.repo_make_private("github/github")
     assert hubot_setup("github/github").body.
-      include?("git@github.com:github/github")
+      include?("https://github.com/github/github")
 
     Janky::GitHub.repo_make_public("github/github")
     assert hubot_setup("github/github").body.
-      include?("git://github.com/github/github")
+      include?("https://github.com/github/github")
 
     assert_equal 1, hubot_status.body.split("\n").size
 

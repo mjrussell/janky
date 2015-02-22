@@ -17,7 +17,7 @@ module Janky
 
       if repo
         url  = "#{settings.base_url}#{repo.name}"
-        [201, "Setup #{repo.name} at #{repo.uri} with #{repo.job_config_path.basename} | #{url}"]
+        [201, "Setup #{repo.name} at #{repo.github_url('')} with #{repo.job_config_path.basename} | #{url}"]
       else
         [400, "Couldn't access #{nwo}. Check the permissions."]
       end
@@ -90,7 +90,7 @@ module Janky
           repo.name,
           master.status,
           repo.campfire_room,
-          repo.uri
+          repo.github_url('')
         ]
       end
       repos.join("\n")
@@ -123,7 +123,7 @@ module Janky
         :name => repo.name,
         :configured_job_template => repo.job_template,
         :used_job_template => repo.job_config_path.basename.to_s,
-        :repo => repo.uri,
+        :repo => repo.github_url(''),
         :room_id => repo.room_id,
         :enabled => repo.enabled,
         :hook_url => repo.hook_url,
